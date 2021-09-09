@@ -10,7 +10,7 @@
 </head>
 <body>
 <section id="form-box">
-    <form action="Account" method="POST">
+    <form action="Account" method="POST" th:object="${user}">
         <h1>Account</h1>
         <label for="firstName">
             <input
@@ -18,7 +18,7 @@
                     id="firstName"
                     name="firstName"
                     placeholder="First Name"
-                    value="${user.firstName}"
+                    th:value="*{firstName}"
                     required
             />
         </label>
@@ -29,7 +29,7 @@
                     id="lastName"
                     name="lastName"
                     placeholder="Last Name"
-                    value="${user.lastName}"
+                    th:value="*{lastName}"
                     required
             />
         </label>
@@ -40,7 +40,7 @@
                     id="email"
                     name="email"
                     placeholder="Email"
-                    value="${user.email}"
+                    th:value="*{email}"
                     required
             />
         </label>
@@ -53,12 +53,12 @@
             />
         </label>
     </form>
-    <form action="DeleteAccount" method="post">
+    <form th:action="@{/account/delete}" method="post">
         <label for="delete">
             <input class="submit btn-danger" type="submit" id="delete" name="delete" value="DELETE ACCOUNT">
         </label>
     </form>
-<%--    <a href="ChangePassword">Change Password</a>--%>
+<!--    <a href="ChangePassword">Change Password</a>-->
 </section>
 </body>
 </html>

@@ -6,11 +6,11 @@ import java.util.Set;
 
 @Entity
 public class User extends Person{
-    @ManyToMany
-    @JoinTable( name = "user_contacts",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "contactId")
-    )
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+//    @JoinTable( name = "user_contacts",
+//            joinColumns = @JoinColumn(name = "userId"),
+//            inverseJoinColumns = @JoinColumn(name = "contactId")
+//    )
     private Set<Contact> contacts = new HashSet<>();
 
     public Set<Contact> getContacts() {

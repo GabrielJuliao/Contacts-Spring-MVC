@@ -10,8 +10,9 @@
 </head>
 <body>
 <section id="form-box">
-    <form action="AddContact" method="POST">
+    <form th:action="@{/contact}" method="POST">
         <h1>Add Contact</h1>
+        <input type="hidden" name="userId" th:value="${user.id}">
         <label for="title">
             <input
                     type="text"
@@ -75,7 +76,7 @@
             />
         </label>
     </form>
-    <a href="overview">
+    <a th:href="@{/}">
         Cancel</a>
 </section>
 </body>

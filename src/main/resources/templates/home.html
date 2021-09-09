@@ -13,7 +13,7 @@
     <header>
         <ul>
             <li>
-                <a href="AddContact">
+                <a th:href="@{/contact/create}">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
                          viewBox="0 0 24 24" width="24px" fill="#666666">
                         <g>
@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="Account" th:inline="text">
+                <a th:href="@{/account}" th:inline="text">
 
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                          fill="#666666">
@@ -63,7 +63,7 @@
             </div>
 
             <th:block th:each="contact: *{contacts}">
-                <a href="Contact?contact_id=${contact.contactID}" class="table-row table-data">
+                <a th:href="@{/contact(id=${contact.id})}" class="table-row table-data">
                         <div class="table-cell" th:text="${contact.title}"></div>
                         <div class="table-cell big-screen" th:text="${contact.address}"></div>
                         <div class="table-cell big-screen" th:text="${contact.phoneNo}"></div>
