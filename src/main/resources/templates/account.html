@@ -10,7 +10,7 @@
 </head>
 <body>
 <section id="form-box">
-    <form action="Account" method="POST" th:object="${user}">
+    <form th:action="@{/account}" method="POST" th:object="${user}">
         <h1>Account</h1>
         <label for="firstName">
             <input

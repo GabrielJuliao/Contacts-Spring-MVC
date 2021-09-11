@@ -6,12 +6,11 @@ import com.gabrieljuliao.contacts.model.User;
 import com.gabrieljuliao.contacts.model.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.security.Principal;
+import java.util.Objects;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/contact")
@@ -24,34 +23,42 @@ public class ContactController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping()
-    public String getContactById(Model model, @RequestParam("id") Long id) {
-        //replace by authenticated principal
-        Optional<Contact> contact = contactRepository.findById(id);
-        contact.ifPresent(value -> model.addAttribute("contact", value));
-        return "contact";
+    @ModelAttribute("user")
+    public User getUser(Principal principal) {
+        return userRepository.findByUsername(principal.getName());
     }
 
-    @PostMapping()
-    public String createContact(Contact contact) {
-        //replace by authenticated principal
-        contact.setUser(userRepository.findById(1L).get());
+    @GetMapping()
+    public String getContactById(@ModelAttribute("user") User user, Model model, @RequestParam("id") Long id) {
+        Set<Contact> contactList = user.getContacts();
+        for (Contact contact : contactList) {
+            if (Objects.equals(contact.getId(), id)) {
+                model.addAttribute("contact", contact);
+                return "contact";
+            }
+        }
+        return "home";
+    }
+
+    @PostMapping
+    public String createOrUpdateContact(@ModelAttribute("user") User user, Contact contact) {
+        contact.setUser(user);
         contactRepository.save(contact);
         return "redirect:/";
     }
-
-    //validate contact
     @GetMapping("/create")
-    public String getContactForm(Model model){
-        //replace by authenticated principal
-        Optional<User> user = userRepository.findById(1L);
-        user.ifPresent(value -> model.addAttribute("user", value));
+    public String getCreateForm(){
         return "add-contact";
     }
 
     @PostMapping("/remove")
-    public String deleteContact(@RequestParam("id") Long id) {
-        contactRepository.deleteById(id);
+    public String deleteContact(@ModelAttribute("user") User user, @RequestParam("id") Long id) {
+        Set<Contact> contactList = user.getContacts();
+        for (Contact contact : contactList) {
+            if (Objects.equals(contact.getId(), id)) {
+                contactRepository.deleteById(id);
+            }
+        }
         return "redirect:/";
     }
 

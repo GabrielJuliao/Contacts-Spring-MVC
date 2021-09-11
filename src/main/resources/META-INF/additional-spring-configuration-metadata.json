@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "contacts.security.users-query",
+      "type": "java.lang.String",
+      "description": "usersByUsernameQuery."
+    },
+    {
+      "name": "contacts.security.authorities-query",
+      "type": "java.lang.String",
+      "description": "authoritiesByUsernameQuery."
+    }
+  ] }

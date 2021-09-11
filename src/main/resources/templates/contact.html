@@ -10,9 +10,9 @@
 </head>
 <body>
 <section id="form-box">
-    <form th:action="@{/contact}" method="POST">
+    <form th:action="@{/contact}" method="POST" th:object="${contact}">
         <h1>Contact</h1>
-        <input type="hidden" name="contact_id" th:value="${contact.id}">
+        <input type="hidden" name="id" th:value="*{id}">
         <label for="title">
             <input
                     type="text"
@@ -20,7 +20,7 @@
                     name="title"
                     placeholder="Title"
                     required
-                    th:value="${contact.title}"
+                    th:value="*{title}"
             />
         </label>
 
@@ -30,7 +30,7 @@
                     id="firstName"
                     name="firstName"
                     placeholder="First Name"
-                    th:value="${contact.firstName}"
+                    th:value="*{firstName}"
             />
         </label>
 
@@ -40,7 +40,7 @@
                     id="lastName"
                     name="lastName"
                     placeholder="Last Name"
-                    th:value="${contact.lastName}"
+                    th:value="*{lastName}"
             />
         </label>
 
@@ -50,7 +50,7 @@
                     id="address"
                     name="address"
                     placeholder="Address"
-                    th:value="${contact.address}"
+                    th:value="*{address}"
             />
         </label>
 
@@ -60,7 +60,7 @@
                     id="phoneNo"
                     name="phoneNo"
                     placeholder="Phone No."
-                    th:value="${contact.phoneNo}"
+                    th:value="*{phoneNo}"
             />
         </label>
 
@@ -70,7 +70,7 @@
                     id="email"
                     name="email"
                     placeholder="Email"
-                    th:value="${contact.email}"
+                    th:value="*{email}"
             />
         </label>
         <label for="submit">
@@ -82,8 +82,8 @@
             />
         </label>
     </form>
-    <form th:action="@{/contact/remove}" method="post">
-        <input type="hidden" name="id" th:value="${contact.id}">
+    <form th:action="@{/contact/remove}" method="post" th:object="${contact}">
+        <input type="hidden" name="id" th:value="*{id}">
         <label for="delete">
             <input class="submit btn-danger" type="submit" id="delete" value="DELETE">
         </label>

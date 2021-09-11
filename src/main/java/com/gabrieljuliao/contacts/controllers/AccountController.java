@@ -3,12 +3,9 @@ package com.gabrieljuliao.contacts.controllers;
 import com.gabrieljuliao.contacts.model.User;
 import com.gabrieljuliao.contacts.model.UserRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/account")
@@ -18,23 +15,28 @@ public class AccountController {
     public AccountController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    @ModelAttribute("user")
+    public User getUser(Principal principal) {
+        return userRepository.findByUsername(principal.getName());
+    }
 
     @GetMapping
-    public String getAccount(Model model) {
-        //replace by authenticated principal
-        Optional<User> contact = userRepository.findById(1L);
-        contact.ifPresent(value -> model.addAttribute("user", value));
+    public String getAccount() {
         return "account";
     }
 
     @PostMapping
-    public String setAccount(User user){
-        return "redirect:/account";
+    public String setAccount(@ModelAttribute("user") User user, String firstName, String lastName, String email) {
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        userRepository.save(user);
+        return "redirect:/";
     }
+
     @PostMapping("/delete")
-    public String deleteAccount(){
-        //replace by authenticated principal
-        userRepository.deleteById(1L);
+    public String deleteAccount(@ModelAttribute("user") User user) {
+        userRepository.deleteById(user.getId());
         return "redirect:/";
     }
 }

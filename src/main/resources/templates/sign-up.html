@@ -10,7 +10,7 @@
 </head>
 <body>
 <section id="form-box">
-    <form action="signUp" method="POST">
+    <form th:action="@{/sign_up}" method="POST">
         <h1>Create an account</h1>
         <label for="firstName">
             <input
@@ -68,7 +68,7 @@
             />
         </label>
     </form>
-    <a href="${pageContext.request.contextPath}/">Already Have an Account? Sign In.</a>
+    <a th:href="@{/sign_in}">Already Have an Account? Sign In.</a>
 </section>
 </body>
 </html>

@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li>
-                <a href="SignOut" id="btn-logout">
+                <a th:href="@{/logout}" id="btn-logout">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
                          viewBox="0 0 24 24" width="24px" fill="#666666">
                         <g>
@@ -64,10 +64,10 @@
 
             <th:block th:each="contact: *{contacts}">
                 <a th:href="@{/contact(id=${contact.id})}" class="table-row table-data">
-                        <div class="table-cell" th:text="${contact.title}"></div>
-                        <div class="table-cell big-screen" th:text="${contact.address}"></div>
-                        <div class="table-cell big-screen" th:text="${contact.phoneNo}"></div>
-                        <div class="table-cell big-screen" th:text="${contact.email}"></div>
+                    <div class="table-cell" th:text="${contact.title}"></div>
+                    <div class="table-cell big-screen" th:text="${contact.address}"></div>
+                    <div class="table-cell big-screen" th:text="${contact.phoneNo}"></div>
+                    <div class="table-cell big-screen" th:text="${contact.email}"></div>
                 </a>
             </th:block>
         </div>

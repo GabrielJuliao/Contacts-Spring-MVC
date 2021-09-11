@@ -10,13 +10,13 @@
 </head>
 <body>
 <section id="form-box">
-    <form method="POST">
+    <form th:action="@{/perform_login}" method="POST">
         <h1>Have an account?</h1>
         <label for="email">
             <input
                     type="text"
                     id="email"
-                    name="email"
+                    name="username"
                     placeholder="Email"
                     required
             />
@@ -38,6 +38,9 @@
                     value="SIGN IN"
             />
         </label>
+        <div th:if="${param.error}" class="alert alert-danger">
+          <p>Invalid Username or Password.</p>
+        </div>
     </form>
 
     <div id="form-extras">
@@ -47,7 +50,7 @@
         </label> -->
         <!-- <a href="">Forgot Password</a> -->
     </div>
-    <a>Don't Have an Account? Sign Up.</a>
+    <a th:href="@{/sign_up}">Don't Have an Account? Sign Up.</a>
 </section>
 </body>
 </html>
