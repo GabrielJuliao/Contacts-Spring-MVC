@@ -1,27 +1,39 @@
 package com.gabrieljuliao.contacts.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-public class Contact extends Person {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+public class Contact{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
+    private String firstName;
+    private String lastName;
+    private String phoneNo;
+    private String email;
+    private String address;
     @ManyToOne
     private User user;
 
-    public String getTitle() {
-        return title;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(id, contact.id);
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }

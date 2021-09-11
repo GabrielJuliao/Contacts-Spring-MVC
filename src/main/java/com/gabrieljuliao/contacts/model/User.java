@@ -1,53 +1,51 @@
 package com.gabrieljuliao.contacts.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @RequiredArgsConstructor
-public class User extends Person implements UserDetails {
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
     private boolean enabled;
-    //    @JoinTable( name = "user_contacts",
-//            joinColumns = @JoinColumn(name = "userId"),
-//            inverseJoinColumns = @JoinColumn(name = "contactId")
-//    )
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    private Set<Contact> contacts = new HashSet<>();
-
     private String role;
 
-    public Set<Contact> getContacts() {
-        return contacts;
-    }
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    @ToString.Exclude
+    private Set<Contact> contacts = new HashSet<>();
 
-    public void setContacts(Set<Contact> contacts) {
-        this.contacts = contacts;
+    public User(String username, String password, String firstName, String lastName, String email, boolean enabled, String role) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.enabled = enabled;
+        this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
     }
 
     @Override
@@ -66,34 +64,15 @@ public class User extends Person implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId());
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
         return 0;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + getId() + ", " +
-                "firstName = " + getFirstName() + ", " +
-                "lastName = " + getLastName() + ", " +
-                "phoneNo = " + getPhoneNo() + ", " +
-                "email = " + getEmail() + ", " +
-                "address = " + getAddress() + ", " +
-                "username = " + getUsername() + ", " +
-                "password = " + getPassword() + ", " +
-                "enabled = " + isEnabled() + ")";
     }
 }
