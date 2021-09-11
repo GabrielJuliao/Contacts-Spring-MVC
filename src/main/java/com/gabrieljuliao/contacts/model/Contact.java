@@ -1,6 +1,9 @@
 package com.gabrieljuliao.contacts.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -14,7 +17,8 @@ import java.util.Objects;
 public class Contact{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long contactId;
+
     private String title;
     private String firstName;
     private String lastName;
@@ -22,6 +26,7 @@ public class Contact{
     private String email;
     private String address;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Override
@@ -29,7 +34,7 @@ public class Contact{
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Contact contact = (Contact) o;
-        return Objects.equals(id, contact.id);
+        return Objects.equals(contactId, contact.contactId);
     }
 
     @Override

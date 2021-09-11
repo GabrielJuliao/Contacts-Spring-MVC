@@ -12,7 +12,7 @@
 <section id="form-box">
     <form th:action="@{/contact}" method="POST" th:object="${contact}">
         <h1>Contact</h1>
-        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="contactId" th:value="*{getContactId}">
         <label for="title">
             <input
                     type="text"
@@ -83,7 +83,7 @@
         </label>
     </form>
     <form th:action="@{/contact/remove}" method="post" th:object="${contact}">
-        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="contactId" th:value="*{getContactId}">
         <label for="delete">
             <input class="submit btn-danger" type="submit" id="delete" value="DELETE">
         </label>

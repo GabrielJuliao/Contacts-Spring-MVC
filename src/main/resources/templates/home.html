@@ -63,7 +63,7 @@
             </div>
 
             <th:block th:each="contact: *{contacts}">
-                <a th:href="@{/contact(id=${contact.id})}" class="table-row table-data">
+                <a th:href="@{/contact(id=${contact.getContactId})}" class="table-row table-data">
                     <div class="table-cell" th:text="${contact.title}"></div>
                     <div class="table-cell big-screen" th:text="${contact.address}"></div>
                     <div class="table-cell big-screen" th:text="${contact.phoneNo}"></div>
