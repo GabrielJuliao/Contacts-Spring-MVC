@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/account")
 @SessionAttributes("user")
@@ -25,10 +27,20 @@ public class AccountController {
 
     @PostMapping
     public String setAccount(User user, String firstName, String lastName, String email) {
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        userRepository.save(user);
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+//        user.setEmail(email);
+//        userRepository.save(user);
+
+        final Optional<User> userOptional = userRepository.findById(user.getUserId());
+
+        userOptional.ifPresent(usr -> {
+            usr.setFirstName(firstName);
+            usr.setLastName(lastName);
+            usr.setEmail(email);
+            userRepository.save(usr);
+        });
+
         return "redirect:/";
     }
 
