@@ -7,6 +7,8 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -14,11 +16,12 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Contact{
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contactId;
-
+    @NotBlank
+    @Size(min = 2, max = 50)
     private String title;
     private String firstName;
     private String lastName;

@@ -100,4 +100,9 @@ a:focus svg {
 
 .alert-danger > *{
     color: var(--danger);
+    background-color: #faebea;
+    padding: 5px;
+    max-width: 250px;
+    border-radius: 4px ;
+    margin: 4px 0 4px 0;
 }
