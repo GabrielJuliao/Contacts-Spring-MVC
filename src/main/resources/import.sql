@@ -1,6 +1,4 @@
-
-
-insert into user (first_name, last_name, email, enabled, username, password, role) values ('John', 'Doe', 'johndoe@domain.domain', true, 'username','$2a$10$U7yoEi1NznBAgTZrMyplG.6Eb33LG3ufoDPbfNxlkIoAPyzduunrC','ROLE_USER');
+insert into user (first_name, last_name, email, enabled, username, password, role) values ('John', 'Doe', 'johndoe@domain.domain', true, 'johndoe@domain.domain','$2a$10$U7yoEi1NznBAgTZrMyplG.6Eb33LG3ufoDPbfNxlkIoAPyzduunrC','ROLE_USER');
 
 insert into contact (title, first_name, last_name, phone_no, email, address, user_id) values ('JohnDoe', 'John', 'Doe', '+xx (xx) xxxx-xxxx', 'johndoe@domain.domain', 'Street 12456',1);
 insert into contact (title, first_name, last_name, phone_no, email, address, user_id) values ('James S.', 'James', 'Smith', '+xx (xx) xxxx-xxxx', 'SmithJames@domain.domain', 'Street 12456',1);
