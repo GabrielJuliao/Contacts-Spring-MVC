@@ -4,13 +4,13 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" th:href="@{/css/global.css}"/>
-    <link rel="stylesheet" th:href="@{/css/form.css}"/>
+    <link rel="stylesheet" th:href="@{css/global.css}"/>
+    <link rel="stylesheet" th:href="@{css/form.css}"/>
     <title>Contacts | Sign In</title>
 </head>
 <body>
 <section id="form-box">
-    <form th:action="@{/perform_login}" method="POST">
+    <form th:action="@{perform_login}" method="POST">
         <h1>Have an account?</h1>
         <label for="email">
             <input
@@ -50,7 +50,7 @@
         </label> -->
         <!-- <a href="">Forgot Password</a> -->
     </div>
-    <a th:href="@{/sign_up}">Don't Have an Account? Sign Up.</a>
+    <a th:href="@{sign_up}">Don't Have an Account? Sign Up.</a>
 </section>
 </body>
 </html>

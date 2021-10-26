@@ -4,13 +4,13 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" th:href="@{/css/global.css}"/>
-    <link rel="stylesheet" th:href="@{/css/form.css}"/>
+    <link rel="stylesheet" th:href="@{css/global.css}"/>
+    <link rel="stylesheet" th:href="@{css/form.css}"/>
     <title>Contacts | Account</title>
 </head>
 <body>
 <section id="form-box">
-    <form th:action="@{/account}" method="POST" th:object="${user}">
+    <form th:action="@{account}" method="POST" th:object="${user}">
         <h1>Account</h1>
         <label for="firstName">
             <input
@@ -53,7 +53,7 @@
             />
         </label>
     </form>
-    <form th:action="@{/account/delete}" method="post">
+    <form th:action="@{account/delete}" method="post">
         <label for="delete">
             <input class="submit btn-danger" type="submit" id="delete" name="delete" value="DELETE ACCOUNT">
         </label>

@@ -1,0 +1,8 @@
+server:
+#  ssl:
+#    key-store: /home/docker-apps-root/portfolio.p12
+#    key-store-password:
+#    key-store-type: pkcs12
+#    key-alias: portfolio
+#    key-password:
+  port: 8181
